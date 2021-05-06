@@ -33,18 +33,19 @@ namespace eBluAppFinal.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _context.User.Where(u => (u.Username == username) &&
-                                                    (u.Password == password))
+                string passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
+                var user = _context.User.Where(u => (u.Username == username))
                                         .Select(n => new User
                                         {
                                             Id = n.Id,
-                                            Username = username,
-                                            Password = password
+                                            Username = n.Username,
+                                            Password = n.Password
                                         })
                                         .FirstOrDefault();
-                if (user == null)
+                var validPassword = BCrypt.Net.BCrypt.Verify(user.Password, passwordHash);
+                if (!validPassword || user == null) 
                 {
-                    ViewBag.LoginError = "Invalid login";
+                    ViewBag.LoginError = "Invalid Login";
                     return View();
                 }
                 else
@@ -104,8 +105,9 @@ namespace eBluAppFinal.Controllers
         {
             if (ModelState.IsValid)
             {
+                string passwordHash = BCrypt.Net.BCrypt.HashPassword(user.Password);
+                user.Password = passwordHash;
                 //check if exists
-                //hash password
                 _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");

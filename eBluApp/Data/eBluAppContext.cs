@@ -16,6 +16,6 @@ namespace eBluApp.Data
 
         public DbSet<eBluApp.Models.Book> Book { get; set; }
 
-        public DbSet<eBluApp.Models.Login> Login { get; set; }
+        public DbSet<eBluApp.Models.Account> Login { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eBluApp.Models
 {
-    public class Login
+    public class Account
     {
         [Key]
         public string EmailAddress { get; set; }

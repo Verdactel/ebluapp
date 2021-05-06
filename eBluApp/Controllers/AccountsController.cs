@@ -19,42 +19,23 @@ namespace eBluApp.Controllers
             _context = context;
         }
 
-        // GET: Logins
-        public async Task<IActionResult> Index()
+        public IActionResult Login()
         {
-            return View(await _context.Login.ToListAsync());
+            return View();
         }
 
-        // GET: Logins/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var login = await _context.Login
-                .FirstOrDefaultAsync(m => m.EmailAddress == id);
-            if (login == null)
-            {
-                return NotFound();
-            }
-
-            return View(login);
-        }
-
-        // GET: Logins/Create
+        // GET: Create page
         public IActionResult Signup()
         {
             return View();
         }
 
-        // POST: Logins/Create
+        // POST: Create page
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Signup([Bind("EmailAddress,FirstName,LastName,Username,Password")] Login login)
+        public async Task<IActionResult> Signup([Bind("EmailAddress,FirstName,LastName,Username,Password")] Account login)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +67,7 @@ namespace eBluApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("EmailAddress,FirstName,LastName,Username,Password")] Login login)
+        public async Task<IActionResult> Edit(string id, [Bind("EmailAddress,FirstName,LastName,Username,Password")] Account login)
         {
             if (id != login.EmailAddress)
             {

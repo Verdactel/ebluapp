@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Signup";
+}
+
+<div class="SignupContainer">
+    <form class="SignupForm" action="~/Account/SignUp" method="post" enctype="multipart/form-data">
+        <input type="text" name="Username" required placeholder="Username" value="" />
+        <input type="text" name="Email" required placeholder="Email" value="" />
+        <input type="password" name="Password" required placeholder="Password" />
+        <input type="password" name="ConfirmPassword" required placeholder="Confirm Password" />
+        <input type="submit" name="Submit" value="Sign Up!" />
+    </form>
+</div>
+<div>Have an account? <a asp-controller="Login" asp-action="Login">Sign in here!</a></div>

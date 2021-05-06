@@ -112,6 +112,8 @@ namespace eBluAppFinal.Controllers
                     return View();
                 }
 
+                //check if passwords match
+
                 //hash password
                 string passwordHash = BCrypt.Net.BCrypt.HashPassword(user.Password);
                 user.Password = passwordHash;

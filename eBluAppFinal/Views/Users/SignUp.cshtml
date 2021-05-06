@@ -4,6 +4,11 @@
     ViewData["Title"] = "Create";
 }
 
+@section AddToHead
+{ 
+    <script src="~/js/passwordmatch.js"></script>
+}
+
 @if(ViewBag.AccExists != "") 
 { 
     <div>@ViewBag.AccExists</div>
@@ -13,9 +18,12 @@
     <form class="SignupForm" asp-action="SignUp" method="post" enctype="multipart/form-data">
         <input type="text" name="Username" required placeholder="Username" value="" />
         <input type="text" name="Email" required placeholder="Email" value="" />
-        <input type="password" name="Password" required placeholder="Password" />
-        <input type="password" name="ConfirmPassword" required placeholder="Confirm Password" />
-        <input type="submit" name="Submit" value="Sign Up!" />
+
+        <input type="password" name="Password" id="password" onkeyup="validPassword()" required placeholder="Password" />
+        <div name="password_error" id="password_error" hidden="hidden">Passwords must match</div>
+        <input type="password" name="ConfirmPassword" id="confirm_password" onkeyup="validPassword()" required placeholder="Confirm Password" />
+
+        <input type="submit" disabled="disabled" name="Submit" id="submit" value="Sign Up!" />
     </form>
 </div>
 <div>Have an account? <a asp-controller="Users" asp-action="Login">Sign in here!</a></div>

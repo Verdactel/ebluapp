@@ -33,7 +33,6 @@ namespace eBluAppFinal.Controllers
         {
             if (ModelState.IsValid)
             {
-                string passwordHash = BCrypt.Net.BCrypt.HashPassword(password);
                 var user = _context.User.Where(u => (u.Username == username))
                                         .Select(n => new User
                                         {
@@ -42,7 +41,7 @@ namespace eBluAppFinal.Controllers
                                             Password = n.Password
                                         })
                                         .FirstOrDefault();
-                var validPassword = BCrypt.Net.BCrypt.Verify(user.Password, passwordHash);
+                var validPassword = BCrypt.Net.BCrypt.Verify(password, user.Password);
                 if (!validPassword || user == null) 
                 {
                     ViewBag.LoginError = "Invalid Login";
@@ -105,12 +104,23 @@ namespace eBluAppFinal.Controllers
         {
             if (ModelState.IsValid)
             {
+                //check if email or username exists
+                var req = _context.User.Where(u => (u.Username == user.Username) || (u.Email == user.Email));
+                if(req.Count() > 0)
+                {
+                    ViewBag.AccExists = "That email or username is already in use.";
+                    return View();
+                }
+
+                //hash password
                 string passwordHash = BCrypt.Net.BCrypt.HashPassword(user.Password);
                 user.Password = passwordHash;
-                //check if exists
+
+                //add user
                 _context.Add(user);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Login", "Users");
             }
             return View(user);
         }

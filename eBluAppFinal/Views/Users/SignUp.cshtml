@@ -4,8 +4,13 @@
     ViewData["Title"] = "Create";
 }
 
+@if(ViewBag.AccExists != "") 
+{ 
+    <div>@ViewBag.AccExists</div>
+}
+
 <div class="SignupContainer">
-    <form class="SignupForm" asp-action="Signup" method="post" enctype="multipart/form-data">
+    <form class="SignupForm" asp-action="SignUp" method="post" enctype="multipart/form-data">
         <input type="text" name="Username" required placeholder="Username" value="" />
         <input type="text" name="Email" required placeholder="Email" value="" />
         <input type="password" name="Password" required placeholder="Password" />

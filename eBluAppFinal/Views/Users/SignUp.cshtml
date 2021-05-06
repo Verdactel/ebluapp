@@ -1,0 +1,16 @@
+﻿@model eBluAppFinal.Models.User
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="SignupContainer">
+    <form class="SignupForm" asp-action="Signup" method="post" enctype="multipart/form-data">
+        <input type="text" name="Username" required placeholder="Username" value="" />
+        <input type="text" name="Email" required placeholder="Email" value="" />
+        <input type="password" name="Password" required placeholder="Password" />
+        <input type="password" name="ConfirmPassword" required placeholder="Confirm Password" />
+        <input type="submit" name="Submit" value="Sign Up!" />
+    </form>
+</div>
+<div>Have an account? <a asp-controller="Users" asp-action="Login">Sign in here!</a></div>

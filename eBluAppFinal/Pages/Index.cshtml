@@ -1,0 +1,13 @@
+﻿@*@page
+@model eBluAppFinal.Pages.IndexModel
+@{
+    ViewData["Title"] = "Recent Books";
+}
+
+<div class="book-cards">
+    <h1>This is where book cards can go</h1>
+</div>
+
+@(await Html.RenderComponentAsync<eBluAppFinal.Components.Book>(RenderMode.ServerPrerendered))
+
+<script src="_framework/blazor.server.js"></script>*@

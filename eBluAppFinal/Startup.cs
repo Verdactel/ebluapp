@@ -37,6 +37,8 @@ namespace eBluAppFinal
             services.AddMvc();
             services.AddControllersWithViews();
 
+            services.AddServerSideBlazor();
+
             services.AddDbContext<eBluAppContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("eBluAppContext")));
         }
@@ -64,6 +66,7 @@ namespace eBluAppFinal
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapBlazorHub();
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
